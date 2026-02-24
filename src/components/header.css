@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Quicksand:wght@500;600&display=swap');
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 70px;
+  background: linear-gradient(90deg, #f7cdd5, #f5e6da);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  font-family: "Quicksand", "Poppins", sans-serif;
+}
+
+/* LOGO */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #7a3e5b;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.logo-icon {
+  font-size: 22px;
+}
+
+.logo-text {
+  letter-spacing: 1px;
+}
+
+/* NAV */
+.header-nav {
+  display: flex;
+  gap: 40px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #8b5e7a;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 4px;
+  transition: 0.2s;
+}
+
+.nav-link:hover {
+  color: #7a3e5b;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: #f2a7b5;
+}
+
+/* LOGOUT */
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn {
+  background: #f2a7b5;
+  color: #ffffff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  font-family: "Quicksand", sans-serif;
+}
+
+.logout-btn:hover {
+  background: #e58fa0;
+}

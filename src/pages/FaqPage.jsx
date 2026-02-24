@@ -1,0 +1,12 @@
+import FaqComponent from "../components/FaqComponent";
+
+const FaqPage = () => {
+  return (
+    <div className="p-5">
+      <FaqComponent />
+    </div>
+  )
+}
+
+
+export default FaqPage;
