@@ -1,6 +1,7 @@
 import "../dist/css/login.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -54,45 +55,47 @@ const LoginPage = () => {
       setLoading(false);
     }
   };
-
+  
   return (
-    <div className="login-wrapper">
-      <div className="login-card">
 
-        <div className="login-illustration">🏺✨</div>
+  <div className="login-wrapper">
+    <div className="login-card">
 
-        <h2 className="login-title">neva's pottery</h2>
-        <p className="login-subtitle">
-          MASUK & PILIH DEKORASI GERABAH FAVORITMU ♡
-        </p>
+      <div className="login-illustration">🏺✨</div>
 
-        <form onSubmit={handleLogin}>
-          <input
-            type="text"
-            placeholder="Username"
-            className="login-input"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-          
-          <input
-            type="password"
-            placeholder="Password"
-            className="login-input"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+      <h2 className="login-title">neva's pottery</h2>
+      <p className="login-subtitle">
+        MASUK & PILIH DEKORASI GERABAH FAVORITMU ♡
+      </p>
 
-          <button className="login-btn" disabled={loading}>
-            {loading ? "Masuk..." : "Masuk"}
-          </button>
-        </form>
+      <form onSubmit={handleLogin}>
+        <input
+          type="text"
+          placeholder="Username"
+          className="login-input"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        
+        <input
+          type="password"
+          placeholder="Password"
+          className="login-input"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-      </div>
+        <button className="login-btn" disabled={loading}>
+          {loading ? "Masuk..." : "Masuk"}
+        </button>
+      </form>
+
+      <p style={{ marginTop: "15px", textAlign: "center" }}>
+        Belum punya akun? <Link to="/register">Buat akun</Link>
+      </p>
+
     </div>
-  );
-};
-
-export default LoginPage;
+  </div>
+); }

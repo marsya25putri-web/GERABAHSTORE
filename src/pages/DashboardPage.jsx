@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "../dist/css/dashboard.css";
 import Header from "../components/header";
 import Footer from "../components/footer";
@@ -6,13 +7,24 @@ import Footer from "../components/footer";
 const DashboardPage = () => {
   const [products, setProducts] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
+  const { id } = useParams(); // ambil id kategori dari URL
 
   useEffect(() => {
     fetch("http://localhost:3001/api/products")
       .then((res) => res.json())
-      .then((data) => setProducts(data))
+      .then((data) => {
+        // jika ada id kategori → filter produk
+        if (id) {
+          const filtered = data.filter(
+            (product) => String(product.category_id) === id
+          );
+          setProducts(filtered);
+        } else {
+          setProducts(data);
+        }
+      })
       .catch((err) => console.error(err));
-  }, []);
+  }, [id]);
 
   return (
     <>

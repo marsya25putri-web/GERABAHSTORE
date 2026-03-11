@@ -22,9 +22,15 @@ const Header = () => {
         <NavLink to="/dashboard" className="nav-link">
           Produk
         </NavLink>
+
+        <NavLink to="/categories" className="nav-link">
+          Categories
+        </NavLink>
+
         <NavLink to="/tentang" className="nav-link">
           Tentang Kami
         </NavLink>
+
         <NavLink to="/kontak" className="nav-link">
           Kontak
         </NavLink>
