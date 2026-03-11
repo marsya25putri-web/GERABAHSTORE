@@ -20,7 +20,15 @@ const RegisterPage = () => {
         body: JSON.stringify({ username, password })
       });
 
-      const data = await res.json();
+      const text = await res.text();
+console.log("Response:", text);
+
+let data;
+try {
+  data = JSON.parse(text);
+} catch {
+  data = { message: text };
+}
 
       if (!res.ok) {
         alert(data.message || "Register gagal");
