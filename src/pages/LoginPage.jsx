@@ -24,6 +24,7 @@ const LoginPage = () => {
       });
 
       const data = await res.json();
+      console.log("Response dari backend:", data); // Debug: lihat struktur response
 
       // ❌ LOGIN GAGAL
       if (!res.ok) {
@@ -32,17 +33,20 @@ const LoginPage = () => {
         return;
       }
 
+      // ✅ PERBAIKAN: Ambil dari data.data, bukan data.user
+      const userData = data.data; // <-- INI YANG DIPERBAIKI
+      
       // simpan user ke localStorage
-      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("user", JSON.stringify(userData));
 
       // ambil role user
-      const role = data.user.role;
+      const role = userData.role;
 
       // ✅ LOGIN BERHASIL
       alert(
         `Login berhasil 🌸\n\n` +
-        `Halo, ${data.user.username}!\n` +
-        `Role kamu: ${role.toUpperCase()}`
+        `Halo, ${userData.username}!\n` +
+        `Role kamu: ${role ? role.toUpperCase() : 'USER'}`
       );
 
       // arahkan ke dashboard
@@ -57,47 +61,44 @@ const LoginPage = () => {
   };
   
   return (
+    <div className="login-wrapper">
+      <div className="login-card">
+        <div className="login-illustration">🏺✨</div>
+        <h2 className="login-title">neva's pottery</h2>
+        <p className="login-subtitle">
+          MASUK & PILIH DEKORASI GERABAH FAVORITMU ♡
+        </p>
 
-  <div className="login-wrapper">
-    <div className="login-card">
+        <form onSubmit={handleLogin}>
+          <input
+            type="text"
+            placeholder="Username"
+            className="login-input"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          
+          <input
+            type="password"
+            placeholder="Password"
+            className="login-input"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-      <div className="login-illustration">🏺✨</div>
+          <button className="login-btn" disabled={loading}>
+            {loading ? "Masuk..." : "Masuk"}
+          </button>
+        </form>
 
-      <h2 className="login-title">neva's pottery</h2>
-      <p className="login-subtitle">
-        MASUK & PILIH DEKORASI GERABAH FAVORITMU ♡
-      </p>
-
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="Username"
-          className="login-input"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        
-        <input
-          type="password"
-          placeholder="Password"
-          className="login-input"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-
-        <button className="login-btn" disabled={loading}>
-          {loading ? "Masuk..." : "Masuk"}
-        </button>
-      </form>
-
-      <p style={{ marginTop: "15px", textAlign: "center" }}>
-        Belum punya akun? <Link to="/register">Buat akun</Link>
-      </p>
-
+        <p style={{ marginTop: "15px", textAlign: "center" }}>
+          Belum punya akun? <Link to="/register">Buat akun</Link>
+        </p>
+      </div>
     </div>
-  </div>
-); }
+  );
+};
 
 export default LoginPage;

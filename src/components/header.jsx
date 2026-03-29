@@ -20,7 +20,12 @@ const Header = () => {
       {/* CENTER - MENU */}
       <nav className="header-nav">
         <NavLink to="/dashboard" className="nav-link">
-          Produk
+          Dashboard
+        </NavLink>
+
+        {/* TAMBAHKAN INI - Menu Manajemen Produk */}
+        <NavLink to="/products" className="nav-link">
+          Manajemen Produk
         </NavLink>
 
         <NavLink to="/categories" className="nav-link">
