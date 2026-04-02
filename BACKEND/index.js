@@ -6,6 +6,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import multer from "multer";
 import fs from "fs";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const { Pool } = pkg;
 const app = express();
@@ -21,11 +24,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 
 // ===== DATABASE =====
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "toko_gerabah",
-  password: "postgres",
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
 });
 
 // ===== TEST DATABASE CONNECTION =====
@@ -188,6 +187,24 @@ app.post("/api/login", async (req, res) => {
     res.status(500).json({ 
       success: false,
       message: "Server error: " + err.message 
+    });
+  }
+});
+
+// ===== TEST DATABASE SUPABASE =====
+app.get("/api/test-db", async (req, res) => {
+  try {
+    const result = await pool.query('SELECT NOW() as current_time');
+    res.json({ 
+      success: true,
+      message: 'Koneksi database Supabase berhasil!', 
+      time: result.rows[0].current_time 
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      success: false,
+      message: 'Koneksi database gagal!', 
+      error: error.message 
     });
   }
 });
