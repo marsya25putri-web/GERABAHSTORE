@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "../dist/css/dashboard.css";
 import Header from "../components/header";
 import Footer from "../components/footer";
 
